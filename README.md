@@ -1,5 +1,5 @@
 ## Car Rental Agency Management System
-###### A web-based application built with ASP.NET Core MVC and Entity Framework Core for managing car rentals, payments, customers, and vehicles.
+#### A web-based application built with ASP.NET Core MVC and Entity Framework Core for managing car rentals, payments, customers, and vehicles.
 
 ### Features
 1. Manage rentals: create, edit, and track bookings.
