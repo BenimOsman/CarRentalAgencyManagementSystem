@@ -2,54 +2,89 @@
     ViewData["Title"] = "Privacy Policy";
 }
 
-<div class="container mt-5">
-    <h1 class="fw-bold text-primary mb-4">@ViewData["Title"]</h1>
-    <p class="lead text-secondary">
-        At <strong>CarRentalAgencyMngSystem</strong>, we value your trust and are committed to protecting your privacy.
-        This Privacy Policy explains how we collect, use, and safeguard your information when you use our platform.
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .privacy-container {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+        .privacy-container h1 {
+            color: #0d6efd;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .privacy-container h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .privacy-container p, .privacy-container ul {
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .privacy-container ul {
+            margin-left: 20px;
+        }
+
+        .privacy-container .alert {
+            background-color: #cff4fc;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #055160;
+        }
+
+        .privacy-container .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+</style>
+
+<div class="privacy-container">
+    <h1>@ViewData["Title"]</h1>
+    <p>
+        At <strong>CarRentalManagementSystem</strong>, we value your privacy. This policy explains how we handle your data.
     </p>
 
-    <div class="mt-4">
-        <h4 class="text-dark">Information We Collect</h4>
-        <ul class="ms-3">
-            <li>Personal details such as name, email, phone number, and driving license information.</li>
-            <li>Rental history and preferences to improve your experience.</li>
-            <li>Payment details to process secure transactions.</li>
-        </ul>
+    <h4>Information We Collect</h4>
+    <ul>
+        <li>Personal details (name, email, phone, driving license).</li>
+        <li>Rental and payment history.</li>
+    </ul>
+
+    <h4>How We Use Your Information</h4>
+    <ul>
+        <li>To manage bookings and rentals.</li>
+        <li>To ensure secure payments and support.</li>
+    </ul>
+
+    <h4>Security</h4>
+    <p>
+        Your data is protected with strict security measures.
+    </p>
+
+    <div class="alert">
+        By using our services, you agree to this Privacy Policy. It may be updated periodically.
     </div>
 
-    <div class="mt-4">
-        <h4 class="text-dark">How We Use Your Information</h4>
-        <ul class="ms-3">
-            <li>To facilitate car bookings and rental management.</li>
-            <li>To provide customer support and resolve issues quickly.</li>
-            <li>To ensure secure payments and maintain rental records.</li>
-            <li>To improve services based on customer feedback and usage trends.</li>
-        </ul>
-    </div>
-
-    <div class="mt-4">
-        <h4 class="text-dark">Data Protection & Security</h4>
-        <p>
-            We implement strict security measures to safeguard your personal and financial information.
-            Access to sensitive data is restricted and encrypted to ensure maximum protection.
-        </p>
-    </div>
-
-    <div class="mt-4">
-        <h4 class="text-dark">Your Rights</h4>
-        <p>
-            You have the right to access, update, or delete your personal information at any time.
-            For any privacy concerns, please contact our support team.
-        </p>
-    </div>
-
-    <div class="alert alert-info mt-5 rounded-3">
-        <strong>Note:</strong> By using our services, you agree to this Privacy Policy.
-        We may update it periodically to reflect changes in our practices.
-    </div>
-
-    <div class="mt-4">
-        <p class="text-muted">© 2025 CarRentalAgencyMngSystem. All rights reserved.</p>
+    <div class="footer">
+        © 2025 CarRentalManagementSystem. All rights reserved.
     </div>
 </div>

@@ -1,65 +1,97 @@
 ﻿@model IEnumerable<CarRentalAgencyMngSystem.Models.Rental>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Rentals";
 }
+
+<style>
+    .btn {
+        margin: 2px;
+        padding: 4px 8px;
+        border-radius: 5px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.85rem;
+    }
+
+    .btn-create {
+        background-color: #198754;
+    }
+
+    .btn-edit {
+        background-color: #ffc107;
+    }
+
+    .btn-details {
+        background-color: #0d6efd;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    h1 {
+        text-align: left;
+        color: #0d6efd;
+        margin-bottom: 10px;
+    }
+
+    .create-btn-container {
+        text-align: left;
+        margin-bottom: 10px;
+    }
+</style>
 
 <h1>RENTALS</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="create-btn-container">
+    <a asp-action="Create" class="btn btn-create">Create New</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Car)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Customer)
-            </th>
-            <th></th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Cost</th>
+            <th>Status</th>
+            <th>Car</th>
+            <th>Customer</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Car.LicensePlate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RentalId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RentalId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RentalId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StartDate.ToShortDateString()</td>
+                <td>@item.EndDate.ToShortDateString()</td>
+                <td>$@item.TotalCost</td>
+                <td>@item.Status</td>
+                <td>@item.Car.LicensePlate</td>
+                <td>@item.Customer.Email</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RentalId" class="btn btn-edit">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.RentalId" class="btn btn-details">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.RentalId" class="btn btn-delete">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
