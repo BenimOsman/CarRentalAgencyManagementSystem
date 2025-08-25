@@ -33,11 +33,7 @@ namespace CarRentalAgencyMngSystem.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Cars = new SelectList(_context.Cars.ToList(), "CarId", "LicensePlate", null, "DailyRate");
-            ViewBag.Customers = new SelectList(_context.Customers.ToList(), "CustomerId", "Email");
-            ViewBag.StatusList = Enum.GetValues(typeof(RentalStatus))
-                                     .Cast<RentalStatus>()
-                                     .Select(s => new SelectListItem { Value = s.ToString(), Text = s.ToString() });
+            PopulateDropdowns(null);
             return View();
         }
 
@@ -77,6 +73,7 @@ namespace CarRentalAgencyMngSystem.Controllers
             return View(rental);
         }
 
+        // POST for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RentalId,CarId,CustomerId,StartDate,EndDate,Status")] Rental rental)
@@ -88,18 +85,26 @@ namespace CarRentalAgencyMngSystem.Controllers
                 try
                 {
                     var car = await _context.Cars.FindAsync(rental.CarId);
+                    if (car == null)
+                    {
+                        ModelState.AddModelError("CarId", "Invalid Car selected.");
+                        PopulateDropdowns(rental);
+                        return View(rental);
+                    }
+
+                    // Recalculate TotalCost
                     var days = (rental.EndDate - rental.StartDate).Days;
                     if (days < 1) days = 1;
                     rental.TotalCost = car.DailyRate * days;
 
                     await _rentalRepo.UpdateRental(id, rental);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (await _rentalRepo.GetRentalById(id) == null) return NotFound();
                     throw;
                 }
-                return RedirectToAction(nameof(Index));
             }
 
             PopulateDropdowns(rental);
@@ -123,8 +128,8 @@ namespace CarRentalAgencyMngSystem.Controllers
 
         private void PopulateDropdowns(Rental rental)
         {
-            ViewBag.Cars = new SelectList(_context.Cars.ToList(), "CarId", "LicensePlate", rental.CarId);
-            ViewBag.Customers = new SelectList(_context.Customers.ToList(), "CustomerId", "Email", rental.CustomerId);
+            ViewBag.Cars = new SelectList(_context.Cars.ToList(), "CarId", "LicensePlate", rental?.CarId);
+            ViewBag.Customers = new SelectList(_context.Customers.ToList(), "CustomerId", "Email", rental?.CustomerId);
             ViewBag.StatusList = Enum.GetValues(typeof(RentalStatus))
                                      .Cast<RentalStatus>()
                                      .Select(s => new SelectListItem { Value = s.ToString(), Text = s.ToString() });

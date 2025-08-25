@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CarRentalAgencyMngSystem.Models.Car>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cars";
 }
 
 <style>
@@ -80,12 +80,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Make)</td>
-                <td>@Html.DisplayFor(modelItem => item.Model)</td>
-                <td>@Html.DisplayFor(modelItem => item.Year)</td>
-                <td>@Html.DisplayFor(modelItem => item.LicensePlate)</td>
-                <td>@Html.DisplayFor(modelItem => item.DailyRate)</td>
-                <td>@Html.DisplayFor(modelItem => item.IsAvailable)</td>
+                <td>@item.Make</td>
+                <td>@item.Model</td>
+                <td>@item.Year</td>
+                <td>@item.LicensePlate</td>
+                <td>₹@item.DailyRate.ToString("N2")</td>
+                <td>@item.IsAvailable</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.CarId" class="btn btn-edit">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.CarId" class="btn btn-details">Details</a>

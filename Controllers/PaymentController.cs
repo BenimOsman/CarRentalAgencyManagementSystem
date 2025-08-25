@@ -61,7 +61,6 @@ namespace CarRentalAgencyMngSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Auto-set Amount from Rental
                 var rental = await _context.Rentals.FindAsync(payment.RentalId);
                 if (rental == null)
                 {
@@ -70,7 +69,7 @@ namespace CarRentalAgencyMngSystem.Controllers
                     return View(payment);
                 }
 
-                payment.Amount = rental.TotalCost;      // Set amount automatically
+                payment.Amount = rental.TotalCost;      // Auto-set amount
                 payment.PaymentDate = DateTime.Now;
 
                 _context.Add(payment);
@@ -156,7 +155,7 @@ namespace CarRentalAgencyMngSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Helper: populate Rentals dropdown
+        // Helper: populate Rentals dropdown with Rupee formatting
         private void PopulateRentalsDropdown(int? selectedId = null)
         {
             var rentals = _context.Rentals
@@ -167,7 +166,7 @@ namespace CarRentalAgencyMngSystem.Controllers
             ViewBag.Rentals = new SelectList(rentals.Select(r => new
             {
                 r.RentalId,
-                DisplayText = $"{r.RentalId} - {r.Customer.Name} ({r.Car.Model}) - {r.TotalCost:C}"
+                DisplayText = $"{r.RentalId} - {r.Customer.Name} ({r.Car.Model}) - ₹{r.TotalCost}"
             }), "RentalId", "DisplayText", selectedId);
         }
     }
